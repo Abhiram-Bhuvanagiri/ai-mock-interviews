@@ -108,18 +108,18 @@ export async function getLatestInterviews(
     ...doc.data(),
   })) as Interview[];
 }
+export async function getInterviewsByUserId(userId?: string) {
+  // guard: if no userId, return empty list (prevents sending undefined to Firestore)
+  if (!userId) return [];
 
-export async function getInterviewsByUserId(
-  userId: string
-): Promise<Interview[] | null> {
-  const interviews = await db
+  const interviewsSnap = await db
     .collection("interviews")
     .where("userId", "==", userId)
     .orderBy("createdAt", "desc")
     .get();
 
-  return interviews.docs.map((doc) => ({
+  return interviewsSnap.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
-  })) as Interview[];
+  }));
 }
