@@ -80,11 +80,11 @@ export async function signIn(params: SignInParams) {
 
     await setSessionCookie(idToken);
   } catch (error: any) {
-    console.log("");
+    console.error("Sign in error:", error);
 
     return {
       success: false,
-      message: "Failed to log into account. Please try again.",
+      message: "Failed to log into account. Please try again. " + (error.message || ""),
     };
   }
 }
