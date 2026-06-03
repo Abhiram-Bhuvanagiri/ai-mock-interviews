@@ -62,7 +62,7 @@ export async function signUp(params: SignUpParams) {
 
     return {
       success: false,
-      message: "Failed to create account. Please try again.",
+      message: "Failed to create account. Please try again. " + (error.message || ""),
     };
   }
 }
