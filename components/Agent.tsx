@@ -62,9 +62,14 @@ const Agent = ({
       setIsSpeaking(false);
     };
 
-    const onError = (error: Error) => {
-      console.log("Error:", error);
-      toast.error(`VAPI Error: ${error.message || "Unknown error"}`);
+    const onError = (error: any) => {
+      console.error("VAPI Event Error:", error);
+      const msg = 
+        error?.message || 
+        error?.error?.message || 
+        error?.error || 
+        (typeof error === 'string' ? error : "Unknown error");
+      toast.error(`VAPI Error: ${msg}`);
       setCallStatus(CallStatus.INACTIVE);
     };
 
