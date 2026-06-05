@@ -142,9 +142,9 @@ const Agent = ({
           },
         });
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("VAPI Start Error:", error);
-      toast.error(`Call failed: ${error.message || "Unknown error"}`);
+      toast.error(`Call failed: ${error instanceof Error ? error.message : "Unknown error"}`);
       setCallStatus(CallStatus.INACTIVE);
     }
   };

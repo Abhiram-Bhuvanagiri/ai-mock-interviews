@@ -126,5 +126,5 @@ export async function getInterviewsByUserId(userId?: string) {
   return interviewsSnap.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
-  }));
+  })) as Interview[];
 }
